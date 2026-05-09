@@ -229,10 +229,11 @@ async function initApp(){
   CATS=L('ht_cats',null);
   try{
     setSync('同步中...');
+    var timeout=new Promise(function(_,rj){setTimeout(function(){rj(new Error('timeout'))},5000)});
     var p1=sbGet('h_cats',{device_id:'eq.'+DID,select:'*'});
     var p2=sbGet('h_recs',{device_id:'eq.'+DID,select:'*',order:'start_time.desc'});
     var p3=sbGet('h_projs',{device_id:'eq.'+DID,select:'*',order:'start_date.desc'});
-    var all=await Promise.all([p1,p2,p3]);
+    var all=await Promise.race([Promise.all([p1,p2,p3]),timeout]);
     CATS=all[0];RECS=all[1];PROJS=all[2].map(function(p){return{id:p.id,title:p.title,desc:p.description||'',start:p.start_date||'',end:p.end_date||'',days:JSON.parse(p.frequency_days||'[1,2,3,4,5]'),dur:p.duration_per_session||1,showCal:p.show_calendar!==false,ms:JSON.parse(p.milestones||'[]'),status:p.status}});
     if(CATS.length===0){for(var i=0;i<PRESETS.length;i++){var ct={id:uid(),device_id:DID,name:PRESETS[i].n,icon:PRESETS[i].i,color:PRESETS[i].c,preset:true};CATS.push(ct);await sbPost('h_cats',ct)}}
     setSync('云端');
