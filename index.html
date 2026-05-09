@@ -200,6 +200,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="overlay" id="projOverlay" onclick="if(event.target===this)closeProject()"><div class="pdet" id="projDetail"></div></div>
 
 <script>
+window.onerror=function(m,u,l){var s=document.getElementById('syncStatus');if(s)s.textContent='JS错误:'+m.slice(0,60)};
 var SB='https://wagkkffwmvwgbcfxczft.supabase.co/rest/v1';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZ2trZmZ3bXZ3Z2JjZnhjemZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMTk2ODksImV4cCI6MjA5Mzc5NTY4OX0.0gxJBInSmxtAgMei6CyyQoTG5RdYwcxP6gHg5GqLUPM';
 var DID=localStorage.getItem('ht_did')||(function(){var d='ht_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);localStorage.setItem('ht_did',d);return d})();
