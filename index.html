@@ -129,6 +129,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </style>
 </head>
 <body>
+<div id="jsTest" style="background:#e74c3c;color:#fff;padding:10px;text-align:center;font-size:14px">⏳ JS 加载中...</div>
 <div class="app">
 <nav class="tabs">
 <a onclick="switchTab('record')" data-tab="record" class="on">记录</a>
@@ -195,6 +196,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="overlay" id="projOverlay" onclick="if(event.target===this)closeProject()"><div class="pdet" id="projDetail"></div></div>
 
 <script>
+document.getElementById('jsTest').style.background='#5cb85c';
+document.getElementById('jsTest').textContent='JS 运行正常';
 var CATS=[],RECS=[],PROJS=[],activeRange='day',editCatId=null,pieC=null,barC=null,timer=null,ti=null,calDate=new Date(),editPid=null;
 var PRESETS=[{n:'学英语',i:'📖',c:'#4a90d9'},{n:'运动',i:'🏃',c:'#5cb85c'},{n:'读书',i:'📚',c:'#9b59b6'},{n:'做实验',i:'🔬',c:'#f0ad4e'},{n:'学习',i:'✏️',c:'#20b2aa'},{n:'工作',i:'💼',c:'#e74c3c'}];
 var WKD=['一','二','三','四','五','六','日'],PCL=['#4a90d9','#5cb85c','#9b59b6','#f0ad4e','#20b2aa','#e74c3c','#ff6b8a','#607d8b'];
@@ -283,7 +286,9 @@ function switchTab(tab){document.querySelectorAll('.tabs a').forEach(function(b)
 document.querySelectorAll('#statsRange button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('#statsRange button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');activeRange=b.dataset.range;renderStats()})});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('stopOverlay').classList.contains('on'))closeStop();if(document.getElementById('catOverlay').classList.contains('on'))closeCat();if(document.getElementById('projOverlay').classList.contains('on'))closeProject();if(document.getElementById('calOverlay').classList.contains('on'))closeCalAdd();if(document.getElementById('cardOverlay').classList.contains('on'))closeCard()}});
 
+document.getElementById('jsTest').textContent='initApp 已调用';
 initApp();
+document.getElementById('jsTest').style.display='none';
 (function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';s.async=true;document.head.appendChild(s)})();
 </script>
 </body>
